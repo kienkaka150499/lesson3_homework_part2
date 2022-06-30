@@ -59,36 +59,39 @@ class snackBar extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      child: ElevatedButton(
-          onPressed: () {
-            var result = '';
-            int? number = int.tryParse(myController.text);
-            if (myController.text.isEmpty) {
-              result = 'Ban chua nhap gia tri! Vui long nhap vao 1 so nguyen!';
-            } else {
-              if (number == null) {
-                result = 'Ban nhap khong dung! Vui long nhap vao 1 so nguyen!';
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+        child: ElevatedButton(
+            onPressed: () {
+              var result = '';
+              int? number = int.tryParse(myController.text);
+              if (myController.text.isEmpty) {
+                result = 'Ban chua nhap gia tri! Vui long nhap vao 1 so nguyen!';
               } else {
-                bool check = _check(number);
-                if (check) {
-                  result = 'So $number la so nguyen to!';
+                if (number == null) {
+                  result = 'Ban nhap khong dung! Vui long nhap vao 1 so nguyen!';
                 } else {
-                  result = 'So $number khong phai la so nguyen to!';
+                  bool check = _check(number);
+                  if (check) {
+                    result = 'So $number la so nguyen to!';
+                  } else {
+                    result = 'So $number khong phai la so nguyen to!';
+                  }
                 }
               }
-            }
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-                result,
-                style: TextStyle(fontSize: 15),
-              ),
-              duration: Duration(seconds: 5),
-            ));
-          },
-          child: const Text(
-            'Check',
-            style: TextStyle(fontSize: 20),
-          )),
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(
+                  result,
+                  style: TextStyle(fontSize: 15),
+                ),
+                duration: Duration(seconds: 5),
+              ));
+            },
+            child: const Text(
+              'Check',
+              style: TextStyle(fontSize: 20),
+            )),
+      ),
     );
   }
 }
